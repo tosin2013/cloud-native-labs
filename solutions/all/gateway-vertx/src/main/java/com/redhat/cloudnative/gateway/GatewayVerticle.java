@@ -34,9 +34,9 @@ public class GatewayVerticle extends AbstractVerticle {
         router.route().handler(CorsHandler.create("*").allowedMethod(HttpMethod.GET));
         router.get("/*").handler(StaticHandler.create("assets"));
         router.get("/health").handler(ctx -> ctx.response().end(new JsonObject().put("status", "UP").toString()));
-        router.get("/api/products").handler(this::products);
+        router.get("/api/products").handler(this::products); // (1)
 
-        ServiceDiscovery.create(vertx, discovery -> {
+        ServiceDiscovery.create(vertx, discovery -> { // (2)
             // Catalog lookup
             Single<WebClient> catalogDiscoveryRequest = HttpEndpoint.rxGetWebClient(discovery,
                 rec -> rec.getName().equals("catalog"))
@@ -63,7 +63,7 @@ public class GatewayVerticle extends AbstractVerticle {
         });
     }
 
-    private void products(RoutingContext rc) {
+    private void products(RoutingContext rc) { // (3)
         // Retrieve catalog
         catalog
             .get("/api/catalog")
@@ -92,7 +92,7 @@ public class GatewayVerticle extends AbstractVerticle {
             );
     }
 
-    private Single<JsonObject> getAvailabilityFromInventory(JsonObject product) {
+    private Single<JsonObject> getAvailabilityFromInventory(JsonObject product) { // (4)
         // Retrieve the inventory for a given product
         return inventory
             .get("/api/inventory/" + product.getString("itemId"))
