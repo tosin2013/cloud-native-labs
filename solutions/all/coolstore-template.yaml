@@ -9,7 +9,7 @@ parameters:
   displayName: Git Repository
   name: GIT_URI
   required: true
-  value: https://github.com/tosin2013/cloud-native-guides.git
+  value: https://github.com/tosin2013/cloud-native-labs.git
 - description: Git branch/tag reference
   displayName: Git Branch/Tag
   name: GIT_REF
