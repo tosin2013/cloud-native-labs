@@ -130,7 +130,7 @@ objects:
         kind: ImageStreamTag
         name: inventory:latest
     source:
-      contextDir: solutions/all/inventory-wildfly-swarm
+      contextDir: solutions/all/inventory-thorntail
       git:
         ref: ${GIT_REF}
         uri: ${GIT_URI}
@@ -892,7 +892,7 @@ objects:
   spec:
     runPolicy: Parallel
     source:
-      contextDir: solutions/all/inventory-wildfly-swarm
+      contextDir: solutions/all/inventory-thorntail
       git:
         ref: ${GIT_REF}
         uri: ${GIT_URI}
