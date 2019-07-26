@@ -1,21 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project 
-    xmlns="http://maven.apache.org/POM/4.0.0" 
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
+
     <groupId>com.redhat.cloudnative</groupId>
     <artifactId>gateway</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>jar</packaging>
+
     <name>CoolStore Gateway Service</name>
     <description>CoolStore Gateway Service with Eclipse Vert.x</description>
+
     <properties>
-        <vertx.version>3.5.1.redhat-004</vertx.version>
+        <vertx.version>3.6.3.redhat-00009</vertx.version>
         <vertx-maven-plugin.version>1.0.15</vertx-maven-plugin.version>
         <vertx.verticle>com.redhat.cloudnative.gateway.GatewayVerticle</vertx.verticle>
         <fabric8.maven.plugin.version>3.5.40</fabric8.maven.plugin.version>
         <slf4j.version>1.7.21</slf4j.version>
     </properties>
+
     <repositories>
       <repository>
         <id>redhat-ga</id>
@@ -28,6 +31,7 @@
         <url>https://maven.repository.redhat.com/ga/</url>
       </pluginRepository>
     </pluginRepositories>
+
     <dependencyManagement>
         <dependencies>
             <dependency>
@@ -39,6 +43,7 @@
             </dependency>
         </dependencies>
     </dependencyManagement>
+
     <dependencies>
         <dependency>
             <groupId>io.vertx</groupId>
@@ -58,7 +63,7 @@
         </dependency>
         <dependency>
             <groupId>io.vertx</groupId>
-            <artifactId>vertx-rx-java</artifactId>
+            <artifactId>vertx-rx-java2</artifactId>
         </dependency>
         <dependency>
             <groupId>io.vertx</groupId>
@@ -79,6 +84,7 @@
             <version>${slf4j.version}</version>
         </dependency>
     </dependencies>
+
     <build>
         <plugins>
             <plugin>
@@ -132,6 +138,11 @@
                             </all>
                         </labels>
                     </resources>
+                    <enricher>
+                        <excludes>
+                            <exclude>vertx-health-check</exclude>
+                        </excludes>
+                    </enricher>
                     <generator>
                         <includes>
                             <include>vertx</include>
@@ -142,13 +153,6 @@
                             </vertx>
                         </config>
                     </generator>
-                    <enricher>
-                        <config>
-                            <vertx-health-check>
-                                <path>/health</path>
-                            </vertx-health-check>
-                        </config>
-                    </enricher>
                 </configuration>
             </plugin>
         </plugins>
